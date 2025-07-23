@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday muu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffe4e1 0%, #ffb6c1 100%);
+      font-family: 'Quicksand', sans-serif;
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+    .background-anim {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .float-heart, .float-flower {
+      position: absolute;
+      width: 32px; height: 32px;
+      opacity: 0.18;
+      will-change: transform, opacity;
+      animation: floatUp 8s linear infinite;
+    }
+    .float-flower {
+      width: 28px; height: 28px;
+      opacity: 0.13;
+      animation-duration: 10s;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(1); opacity: 0.18; }
+      80% { opacity: 0.18; }
+      100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+    }
+    .centered {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .glass-card {
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(14px);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+      border: 1.5px solid rgba(255,255,255,0.22);
+      max-width: 98vw;
+      width: 98vw;
+      min-width: 0;
+      margin: 0 auto;
+      padding: 2.2rem 1.1rem 1.5rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      min-height: 340px;
+      box-sizing: border-box;
+    }
+    .home-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.2rem;
+      color: #e75480;
+      margin-bottom: 2.2rem;
+      text-align: center;
+      text-shadow: 0 2px 8px #fff6fa;
+      letter-spacing: 1px;
+    }
+    .wish-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: #e75480;
+      margin-bottom: 1.1rem;
+      text-align: center;
+      text-shadow: 0 2px 8px #fff6fa;
+    }
+    .wish-content {
+      font-size: 1.08rem;
+      color: #d72660;
+      margin-bottom: 1.2rem;
+      margin-top: 0.7rem;
+      line-height: 1.7;
+      text-align: left;
+      max-height: 38vh;
+      overflow-y: auto;
+      width: 100%;
+      background: rgba(255,255,255,0.13);
+      border-radius: 1rem;
+      padding: 1.1rem 0.7rem;
+      box-sizing: border-box;
+      user-select: text;
+      scrollbar-width: thin;
+    }
+    .wish-content::-webkit-scrollbar {
+      width: 6px;
+      background: transparent;
+    }
+    .wish-content::-webkit-scrollbar-thumb {
+      background: #ffe4e1;
+      border-radius: 4px;
+    }
+    .btn {
+      display: block;
+      width: 90vw;
+      max-width: 340px;
+      margin: 1.2rem auto 0 auto;
+      padding: 1rem 0;
+      border-radius: 2rem;
+      border: none;
+      background: linear-gradient(90deg, #ffb6c1 0%, #ffe4e1 100%);
+      color: #d72660;
+      font-size: 1.18rem;
+      font-family: 'Dancing Script', cursive;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #f8bbd0;
+      transition: background 0.2s, transform 0.2s;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .btn:active, .btn:focus {
+      background: linear-gradient(90deg, #ffe4e1 0%, #ffb6c1 100%);
+      transform: scale(0.98);
+    }
+    .back-btn {
+      position: absolute;
+      top: 1.1rem;
+      left: 1.1rem;
+      background: rgba(255,255,255,0.7);
+      color: #e75480;
+      border: none;
+      border-radius: 1.2rem;
+      font-size: 1rem;
+      font-family: 'Dancing Script', cursive;
+      padding: 0.4rem 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #f8bbd0;
+      transition: background 0.2s, color 0.2s;
+      z-index: 2;
+    }
+    .back-btn:active, .back-btn:focus {
+      background: #ffe4e1;
+      color: #d72660;
+    }
+    .pw-glass-card {
+      background: rgba(255,255,255,0.32);
+      backdrop-filter: blur(16px);
+      border-radius: 2rem;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+      border: 1.5px solid rgba(255,255,255,0.22);
+      max-width: 95vw;
+      width: 95vw;
+      min-width: 0;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 2.2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      box-sizing: border-box;
+      animation: fadeInCard 1s;
+    }
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: scale(0.97) translateY(30px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .pw-lock {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      color: #e75480;
+      text-shadow: 0 2px 8px #fff6fa;
+    }
+    .pw-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: #e75480;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .pw-input {
+      padding: 1.2rem 1.7rem;
+      border-radius: 1.5rem;
+      border: 1.5px solid #e75480;
+      font-size: 1.25rem;
+      font-family: 'Quicksand',sans-serif;
+      outline: none;
+      margin-bottom: 1.3rem;
+      background: #fff0f6;
+      color: #d72660;
+      width: 80vw;
+      max-width: 320px;
+      text-align: center;
+      box-sizing: border-box;
+      transition: border 0.2s;
+    }
+    .pw-input:focus {
+      border: 1.5px solid #d72660;
+    }
+    .pw-error {
+      color: #d72660;
+      font-weight: bold;
+      font-size: 1.08rem;
+      margin-bottom: 1.3rem;
+      display: none;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .pw-btn {
+      display: block;
+      width: 80vw;
+      max-width: 320px;
+      margin: 0 auto;
+      padding: 1.1rem 0;
+      border-radius: 2rem;
+      border: none;
+      background: linear-gradient(90deg, #ffb6c1 0%, #ffe4e1 100%);
+      color: #d72660;
+      font-size: 1.18rem;
+      font-family: 'Dancing Script', cursive;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #f8bbd0;
+      transition: background 0.2s, transform 0.2s;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .pw-btn:active, .pw-btn:focus {
+      background: linear-gradient(90deg, #ffe4e1 0%, #ffb6c1 100%);
+      transform: scale(0.98);
+    }
+    /* Redesigned Password Page */
+    .pw-outer {
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg, #ffe4e1 0%, #b388ff 100%);
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 10;
+    }
+    .pw-split {
+      display: flex;
+      flex-direction: row;
+      width: 92vw;
+      max-width: 540px;
+      min-height: 340px;
+      background: rgba(255,255,255,0.38);
+      border-radius: 2.2rem;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+      overflow: hidden;
+      animation: fadeInCard 1s;
+    }
+    .pw-side-lock {
+      background: linear-gradient(135deg, #e0c3fc 0%, #ffe4e1 100%);
+      flex: 1.1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: 2.2rem 0.7rem;
+    }
+    .pw-lock-big {
+      font-size: 3.5rem;
+      color: #b388ff;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 12px #fff6fa;
+    }
+    .pw-side-form {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: 2.2rem 1.2rem;
+      background: rgba(255,255,255,0.72);
+    }
+    .pw-title2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.7rem;
+      color: #b388ff;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .pw-input-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      margin-bottom: 1.2rem;
+    }
+    .pw-input2 {
+      width: 100%;
+      padding: 1.2rem 3.2rem 1.2rem 1.5rem;
+      border-radius: 2rem;
+      border: 1.5px solid #b388ff;
+      font-size: 1.18rem;
+      font-family: 'Quicksand',sans-serif;
+      outline: none;
+      background: #f3eaff;
+      color: #7c43bd;
+      box-sizing: border-box;
+      transition: border 0.2s;
+      box-shadow: 0 2px 8px #e0c3fc33;
+    }
+    .pw-input2:focus {
+      border: 1.5px solid #7c43bd;
+    }
+    .pw-toggle {
+      position: absolute;
+      right: 1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.3rem;
+      color: #b388ff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      z-index: 2;
+    }
+    .pw-error2 {
+      color: #d72660;
+      font-weight: bold;
+      font-size: 1.08rem;
+      margin-bottom: 1.3rem;
+      display: none;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .pw-btn2 {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      padding: 1.1rem 0;
+      border-radius: 2rem;
+      border: none;
+      background: linear-gradient(90deg, #b388ff 0%, #e0c3fc 100%);
+      color: #fff;
+      font-size: 1.18rem;
+      font-family: 'Dancing Script', cursive;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #e0c3fc;
+      transition: background 0.2s, transform 0.2s;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .pw-btn2:active, .pw-btn2:focus {
+      background: linear-gradient(90deg, #e0c3fc 0%, #b388ff 100%);
+      transform: scale(0.98);
+    }
+    /* Clean, minimal password card */
+    .pw-clean-card {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-radius: 1.7rem;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      max-width: 95vw;
+      width: 95vw;
+      min-width: 0;
+      margin: 0 auto;
+      padding: 2.2rem 1.2rem 2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      box-sizing: border-box;
+      animation: fadeInCard 0.7s;
+    }
+    .pw-lock-clean {
+      font-size: 2.5rem;
+      color: #e75480;
+      margin-bottom: 1.1rem;
+      text-shadow: 0 2px 8px #fff6fa;
+    }
+    .pw-title-clean {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      color: #e75480;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .pw-input-clean {
+      padding: 1.1rem 1.5rem;
+      border-radius: 1.5rem;
+      border: 1.5px solid #e75480;
+      font-size: 1.15rem;
+      font-family: 'Quicksand',sans-serif;
+      outline: none;
+      margin-bottom: 1.2rem;
+      background: #fff0f6;
+      color: #d72660;
+      width: 80vw;
+      max-width: 320px;
+      text-align: center;
+      box-sizing: border-box;
+      transition: border 0.2s;
+    }
+    .pw-input-clean:focus {
+      border: 1.5px solid #d72660;
+    }
+    .pw-error-clean {
+      color: #d72660;
+      font-weight: 500;
+      font-size: 1.02rem;
+      margin-bottom: 1.2rem;
+      display: none;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .pw-btn-clean {
+      display: block;
+      width: 80vw;
+      max-width: 320px;
+      margin: 0 auto;
+      padding: 1rem 0;
+      border-radius: 2rem;
+      border: none;
+      background: linear-gradient(90deg, #ffb6c1 0%, #ffe4e1 100%);
+      color: #d72660;
+      font-size: 1.18rem;
+      font-family: 'Dancing Script', cursive;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #f8bbd0;
+      transition: background 0.2s, transform 0.2s;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .pw-btn-clean:active, .pw-btn-clean:focus {
+      background: linear-gradient(90deg, #ffe4e1 0%, #ffb6c1 100%);
+      transform: scale(0.98);
+    }
+    .pw-screen-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255,255,255,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    @media (max-width: 600px) {
+      .glass-card {
+        padding: 1.1rem 0.2rem 1.1rem 0.2rem;
+        max-width: 99vw;
+        border-radius: 1.1rem;
+      }
+      .home-title {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+      }
+      .wish-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.7rem;
+      }
+      .wish-content {
+        font-size: 0.98rem;
+        padding: 0.7rem 0.3rem;
+        max-height: 44vh;
+      }
+      .btn {
+        font-size: 1.05rem;
+        padding: 0.8rem 0;
+        border-radius: 1.2rem;
+        min-width: 70vw;
+        max-width: 95vw;
+      }
+      .back-btn {
+        font-size: 0.95rem;
+        padding: 0.3rem 0.7rem;
+        top: 0.7rem;
+        left: 0.7rem;
+      }
+      .pw-glass-card {
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+        max-width: 99vw;
+        border-radius: 1.1rem;
+      }
+      .pw-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+      .pw-lock {
+        font-size: 2rem;
+        margin-bottom: 0.7rem;
+      }
+      .pw-input {
+        font-size: 1.05rem;
+        padding: 0.8rem 1.1rem;
+      }
+      .pw-btn {
+        font-size: 1.05rem;
+        padding: 0.8rem 0;
+        border-radius: 1.2rem;
+        min-width: 70vw;
+        max-width: 95vw;
+      }
+      .pw-clean-card {
+        padding: 1.1rem 0.4rem 1.1rem 0.4rem;
+        max-width: 99vw;
+        border-radius: 1.1rem;
+      }
+      .pw-title-clean {
+        font-size: 1.05rem;
+        margin-bottom: 1rem;
+      }
+      .pw-lock-clean {
+        font-size: 1.5rem;
+        margin-bottom: 0.7rem;
+      }
+      .pw-input-clean {
+        font-size: 1.01rem;
+        padding: 0.8rem 1.1rem;
+      }
+      .pw-btn-clean {
+        font-size: 1.05rem;
+        padding: 0.8rem 0;
+        border-radius: 1.2rem;
+        min-width: 70vw;
+        max-width: 95vw;
+      }
+    }
+    @media (max-width: 700px) {
+      .pw-split {
+        flex-direction: column;
+        min-width: 0;
+        width: 98vw;
+        max-width: 99vw;
+        border-radius: 1.2rem;
+      }
+      .pw-side-lock, .pw-side-form {
+        padding: 1.2rem 0.7rem;
+      }
+      .pw-lock-big {
+        font-size: 2.2rem;
+        margin-bottom: 0.7rem;
+      }
+      .pw-title2 {
+        font-size: 1.1rem;
+        margin-bottom: 0.7rem;
+      }
+      .pw-input2 {
+        font-size: 1.05rem;
+        padding: 0.8rem 2.5rem 0.8rem 1.1rem;
+      }
+      .pw-btn2 {
+        font-size: 1.05rem;
+        padding: 0.8rem 0;
+        border-radius: 1.2rem;
+        min-width: 70vw;
+        max-width: 95vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-anim" id="bg-anim"></div>
+  <div id="password-screen" class="pw-screen-bg">
+    <div class="pw-clean-card">
+      <div class="pw-lock-clean">🔒</div>
+      <div class="pw-title-clean">Enter Birthday Password</div>
+      <input id="pw-input" class="pw-input-clean" type="password" placeholder="Enter password..." autofocus />
+      <div id="pw-error" class="pw-error-clean">Wrong password! Try again.</div>
+      <button class="pw-btn-clean" onclick="checkPassword()">Enter</button>
+    </div>
+  </div>
+  <div class="centered" id="main-content" style="display:none;">
+    <div id="page-0" class="glass-card">
+      <h1 class="home-title">🎂 Happy Birthday muu 🎂</h1>
+      <button class="btn" onclick="goToPage(1)">Welcome muu</button>
+    </div>
+    <div id="page-1" class="glass-card" style="display:none;">
+      <button class="back-btn" onclick="goToPage(0)">← Home</button>
+      <h1 class="wish-title">Welcome, My Love! 💖✨</h1>
+      <div class="wish-content">
+        let's we see our memories ammu 💌🌹🎂
+      </div>
+      <button class="btn" onclick="goToPage(2)">Next →</button>
+    </div>
+    <div id="page-2" class="glass-card" style="display:none;">
+      <button class="back-btn" onclick="goToPage(0)">← Home</button>
+      <h1 class="wish-title">I LOVE YOU AMMU 💖✨& HAPPY Birthday MUU💖✨</h1>
+      <div class="wish-content">
+         Ammu happy birthaday da maa!! , i love you so much... 💖 ammu but i really miss you lotzz ammu , and u remumber this !! 28/07/2023 friday 12:00 AM "happy birthday ammu.. njoy ur day maa..,, ennoda birthdayva veda un birthdayhaga tha
+         na wait panna becoz ne tha enneku ellameee and ur my life partner so un happiness tha ennoda happiness ammu.. , ammu namba life la evalo periya peoblem vantha lu sari .
+          Una entha oru situation la yum kastapada veda mata...da ammu
+
+Still my Last breathing verikum una happy ya vachi irupa.... Una life long happy ya vachi irupa....
+
+Namba rendu peruu life long onna tha irupom
+
+Una na epayum vetu pogavee mata ena vetu uunaiyum poga veda matan.
+
+Namba rendu peruu life long happy ya Ona enjoy panni ketu irukalam ok va ini And once again I will wish you.
+
+Happy birthday my dear pondatii
+
+My sweet heart and cute wife iniya"
+
+      
+      
+
+Again and again I will tell neyum nanum... life long happy ya irukala. And enjoy your birthday with mee "
+
+</div>
+      <button class="btn" onclick="goToPage(3)">Next →</button>
+    </div>
+    <div id="page-3" class="glass-card" style="display:none;">
+      <button class="back-btn" onclick="goToPage(0)">← Home</button>
+      <h1 class="wish-title">future plan!!🫶🫶</h1>
+      <div class="wish-content">
+
+        this time we celebrate our birthday as sad and not together but i know that we will celebrate our birthday together in future and we will make it 
+
+
+        Ammu, I know life can be hurt and give pains sometimes, and I want you to know that . But remember, you are not alone . I am here for you, always. 
+        we will face every challenge together, hand in hand. I will be always behind you , so don't worry about anything, AMMU ...
+        i love you so much ammu , i know you are facing a lot of problems in your life and i know you are feeling alone and sad .
+        But I want you to again know that   you are not alone, and  ammu sry da maa nee ennala tha innake evalo kastam padra 
+        trust me da maa we can make beautiful future together raa maa
+
+      </div>
+      <button class="btn" onclick="goToPage(4)">Next →</button>
+    </div>
+    <div id="page-4" class="glass-card" style="display:none;">
+      <button class="back-btn" onclick="goToPage(0)">← Home</button>
+      <h1 class="wish-title">sry muu </h1>
+      <div class="wish-content">
+         ammu sorry da maa na ethachi thapu pani irutha manichidu da maa  plss 
+
+         once again i wish you a very happy birthday ammu
+         anga ne epadi irukanu theriyala but ne ennala tha innaiku evalo kasat padra paa i am really sorry 
+
+
+         i really need your hug ammu 🥺🥺🥺🫂🫂🫂🫂
+
+
+
+
+      </div>
+      <button class="btn" onclick="goToPage(5)">Next →</button>
+    </div>
+    <div id="page-5" class="glass-card" style="display:none;">
+      <button class="back-btn" onclick="goToPage(0)">← Home</button>
+      <h1 class="wish-title">u know that </h1>
+      <div class="wish-content">
+        in my entier life this time i feel bad ; ethuverikum en birthday la happy ya iruthathu illa na lum sad ah iru tha thu illa but this time i feel bad because unnoda wishes vala and un wish kaga tha romba 
+        wait paniketu irutha but ne wish pannave illa na ni8tu full la un message kaga wait panna 3o clock verikum un message thavera vera yaru message ah yum pakakudathu nu irutha and athu aprm 
+       insta ve delete panita then moring eluthu ne wish pani irupa pakalanu vantha but no ,, sari ni8tu achi wish panuvanu romba wait pana and sill i am waiting for ur message 
+      sari vedu but ne en mela evalo kovama iruka nu ennku real la puriyala and ennaku theriyama therumba ethachi thapu pani irutha manichidu da maa
+      </div>
+      <button class="btn" onclick="goToPage(6)">Next →</button>
+    </div>
+    <div id="page-6" class="glass-card" style="display:none;">
+      <button class="back-btn" onclick="goToPage(0)">← Home</button>
+      <h1 class="wish-title">Forever Yours 🥰</h1>
+      <div class="wish-content">
+       VI forever  💞"<br><br>
+        and ammu  intha web page design panumbothu romba happy panna ne na anupuna message ah la padipe 
+        nu but ethula 1 page ah type panum bothu i didn't control my felling 
+        and ennaku ipa vum bayama tha iruku enga intha message unnaku pudikatha mari ethachi type pani irupeno nu 
+        un keta neraiya pesanu ammu but mudiyala and ne sonathu nala unna ku message kuda pana but ennala unna pathi yosi kama minimum 1 h kuda iruka mudiyala 
+        unna pathi matum tha  en mind la iruke thavira vera ethume yosika mudiyala and intha message ah unna distrub panidumo nu bayama irukku ammu ,,
+        ne nala padichi college la sera verikum na unnkaga wait athu aprm namba full pesiketa irukalam ;
+
+        and i am really sry maa na ethachi thapu pani irutha loo illa unnaku padikatha mari ethachi pani irutha enna manichidu maa plss
+      </div>
+    </div>
+  </div>
+  <script>
+    // Minimal floating hearts/flowers background
+    function createFloatElem(type) {
+      const elem = document.createElement('div');
+      elem.className = type;
+      elem.style.left = Math.random() * 100 + 'vw';
+      elem.style.animationDuration = (7 + Math.random() * 4) + 's';
+      elem.innerHTML = type === 'float-heart' ? '❤️' : '🌸';
+      document.getElementById('bg-anim').appendChild(elem);
+      setTimeout(() => elem.remove(), 11000);
+    }
+    setInterval(() => createFloatElem('float-heart'), 1800);
+    setInterval(() => createFloatElem('float-flower'), 2600);
+
+    // Page navigation
+    let currentPage = 0;
+    function goToPage(page) {
+      for (let i = 0; i <= 6; i++) {
+        const el = document.getElementById('page-' + i);
+        if (el) el.style.display = 'none';
+      }
+      const showEl = document.getElementById('page-' + page);
+      if (showEl) showEl.style.display = '';
+      currentPage = page;
+      window.scrollTo(0, 0);
+    }
+    // Password logic
+    function checkPassword() {
+      const input = document.getElementById('pw-input').value;
+      const errorMsg = document.getElementById('pw-error');
+      if (input === '2821') {
+        document.getElementById('password-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = '';
+        goToPage(0);
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+    document.getElementById('pw-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkPassword();
+    });
+    // Show home page on load
+    // On load, only show password screen
+    window.onload = function() {
+      document.getElementById('password-screen').style.display = '';
+      document.getElementById('main-content').style.display = 'none';
+      goToPage(0);
+    };
+  </script>
+</body>
+</html> 
